@@ -21,7 +21,7 @@ use EasySwoole\WeChat\Utility\NetWork;
 use EasySwoole\WeChat\Bean\OfficialAccount\CustomerService;
 use Swoole\Coroutine;
 
-class Service extends OfficialAccountBase
+class ServiceNew extends OfficialAccountBase
 {
     /**
      * 添加客服账号
@@ -35,7 +35,7 @@ class Service extends OfficialAccountBase
      */
     public function create(CustomerService $service) : bool
     {
-        $url = ApiUrl::generateURL(ApiUrl::CUSTOM_SERVICE_KF_ACCOUNT_ADD, [
+        $url = ApiUrl::generateURL(ApiUrl::CUSTOM_SERVICE_NEW_KF_ACCOUNT_ADD, [
             'ACCESS_TOKEN' => $this->getOfficialAccount()->accessToken()->getToken()
         ]);
 
@@ -69,32 +69,6 @@ class Service extends OfficialAccountBase
         $data = [
             'kf_account' => $service->getKfAccount(),
             'nickname' => $service->getNickname(),
-        ];
-        $response = NetWork::postJsonForJson($url, $data);
-
-        $this->hasException($response);
-
-        return true;
-    }
-    /**
-     * 客服账号绑定客服工作人员微信号
-     *
-     * @param CustomerService $service
-     *
-     * @return bool
-     * @throws InvalidUrl
-     * @throws OfficialAccountError
-     * @throws RequestError
-     */
-    public function inviteworker(CustomerService $service) : bool
-    {
-        $url = ApiUrl::generateURL(ApiUrl::CUSTOM_SERVICE_KF_ACCOUNT_INVITEWORKER, [
-            'ACCESS_TOKEN' => $this->getOfficialAccount()->accessToken()->getToken()
-        ]);
-
-        $data = [
-            'kf_account' => $service->getKfAccount(),
-            'invite_wx' => $service->getInviteWx(),
         ];
         $response = NetWork::postJsonForJson($url, $data);
 
@@ -189,46 +163,7 @@ class Service extends OfficialAccountBase
 
         $this->hasException($json);
 
-        return $json['kf_list']??[];
-    }
-
-    /**
-     * 获取所有在线的客服账号列表
-     * @return array
-     * @throws OfficialAccountError
-     * @throws RequestError
-     * @throws InvalidUrl
-     */
-    public function getOnlineServiceList() : array
-    {
-        $url = ApiUrl::generateURL(ApiUrl::CUSTOM_SERVICE_GET_ONLINE_KF_LIST, [
-            'ACCESS_TOKEN' => $this->getOfficialAccount()->accessToken()->getToken()
-        ]);
-
-        $json = NetWork::getForJson($url);
-
-        $this->hasException($json);
-
-        return $json['kf_online_list'];
-    }
-    /**
-     * 获取客服消息
-     * @return array
-     * @throws OfficialAccountError
-     * @throws RequestError
-     * @throws InvalidUrl
-     */
-    public function getMsgList(RequestedReplyMsg $requestedReplyMsg) : array
-    {
-        $url = ApiUrl::generateURL(ApiUrl::CUSTOM_SERVICE_GET_MSG_LIST, [
-            'ACCESS_TOKEN' => $this->getOfficialAccount()->accessToken()->getToken()
-        ]);
-
-        $response = NetWork::postForJson($url, $requestedReplyMsg->buildMessage());
-
-        $this->hasException($response);
-
-        return $response;
+        return $json['kf_list'];
     }
 
 
@@ -292,9 +227,8 @@ class Service extends OfficialAccountBase
             if (!is_null($fileBean->getPath())) {
                 $fileBean->setData(Coroutine::readFile($fileBean->getPath()));
                 $fileBean->setFilename(basename($fileBean->getPath()));
-            }else{
-                throw new OfficialAccountError('upload file is empty.');
             }
+            throw new OfficialAccountError('upload file is empty.');
         }
 
         if (empty($fileBean->getMimeType())) {

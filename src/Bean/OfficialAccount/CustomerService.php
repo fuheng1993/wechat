@@ -25,6 +25,8 @@ class CustomerService extends SplBean
     protected $password;
     /** @var PostFile 该参数仅在设置客服头像时出现，是form-data中媒体文件标识，有filename、filelength、content-type等信息 */
     protected $media;
+    /** @var string 客服微信号 */
+    protected $invite_wx;
 
     /**
      * @return null|string
@@ -99,4 +101,21 @@ class CustomerService extends SplBean
 
         return $message;
     }
+
+    /**
+     * @return null|string
+     */
+    public function getInviteWx() : ?string
+    {
+        return $this->invite_wx ?? null;
+    }
+
+    /**
+     * @param $password
+     */
+    public function setInviteWx($invite_wx)
+    {
+        $this->invite_wx = $invite_wx;
+    }
+
 }

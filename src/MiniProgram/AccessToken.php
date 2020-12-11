@@ -9,7 +9,6 @@
 namespace EasySwoole\WeChat\MiniProgram;
 
 use EasySwoole\HttpClient\Exception\InvalidUrl;
-use EasySwoole\WeChat\AbstractInterface\AccessTokenInterface;
 use EasySwoole\WeChat\Exception\RequestError;
 use EasySwoole\WeChat\Utility\NetWork;
 use EasySwoole\WeChat\Exception\MiniProgramError;
@@ -19,7 +18,7 @@ use EasySwoole\WeChat\Exception\MiniProgramError;
  * Class AccessToken
  * @package EasySwoole\WeChat\MiniProgram
  */
-class AccessToken extends MinProgramBase implements AccessTokenInterface
+class AccessToken extends MinProgramBase
 {
 
     /**

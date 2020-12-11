@@ -326,6 +326,10 @@ class ApiUrl
      * 客服消息-修改客服账号
      */
     const CUSTOM_SERVICE_KF_ACCOUNT_UPDATE = 'https://api.weixin.qq.com/customservice/kfaccount/update?access_token=ACCESS_TOKEN';
+    /*
+    * 客服消息-邀请绑定客服帐号
+    */
+    const CUSTOM_SERVICE_KF_ACCOUNT_INVITEWORKER = 'https://api.weixin.qq.com/customservice/kfaccount/inviteworker?access_token=ACCESS_TOKEN';
 
     /*
      * 客服消息-删除客服账号
@@ -341,6 +345,14 @@ class ApiUrl
      * 客服消息-获取所有客服账号
      */
     const CUSTOM_SERVICE_GET_KF_LIST = 'https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token=ACCESS_TOKEN';
+    /*
+     * 客服消息-获取所有在线的客服账号
+     */
+    const CUSTOM_SERVICE_GET_ONLINE_KF_LIST = 'https://api.weixin.qq.com/cgi-bin/customservice/getonlinekflist?access_token=ACCESS_TOKEN';
+    /*
+     * 获取聊天记录客服消息-获取所有在线的客服账号
+     */
+    const CUSTOM_SERVICE_GET_MSG_LIST = 'https://api.weixin.qq.com/customservice/msgrecord/getmsglist?access_token=ACCESS_TOKEN';
 
     /*
      * 客服消息-客服输入状态
